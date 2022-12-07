@@ -34,9 +34,9 @@ The `test` workflow does the following:
   * Compiles your project code with `--warnings-as-errors`
   * Runs `mix test`
 
-The `test` workflow runs in a matrix of the three latest major Elixir and two
-latest major Erlang releases, using the latest minor/patch version of each.
-Combinations which are not supported are automatically excluded from the matrix.
+The `test` workflow runs in a matrix of the three latest major Elixir and Erlang
+releases, using the latest minor/patch version of each. Combinations which are
+not supported are automatically excluded from the matrix.
 
 ## The `lint` workflow
 

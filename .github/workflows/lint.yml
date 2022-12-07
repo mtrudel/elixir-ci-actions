@@ -27,6 +27,8 @@ jobs:
         exclude:
           - elixir: 1.12.x
             otp: 25.x
+          - elixir: 1.14.x
+            otp: 23.x
     steps:
     - name: Install apt packages
       if: inputs.apt-packages
