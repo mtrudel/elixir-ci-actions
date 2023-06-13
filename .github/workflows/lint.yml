@@ -52,7 +52,7 @@ jobs:
           deps
           _build
         key: ${{ runner.os }}-${{ matrix.otp }}-${{ matrix.elixir }}-mix-${{ hashFiles('**/mix.lock') }}
-        restore-keys: ${{ runner.os }}-${{ matrix.otp }}-mix-${{ matrix.elixir }}-
+        restore-keys: ${{ runner.os }}-${{ matrix.otp }}-${{ matrix.elixir }}-mix-
     - name: Install mix dependencies
       if: steps.mix-cache.outputs.cache-hit != 'true'
       run: |
@@ -72,7 +72,7 @@ jobs:
       with:
         path: priv/plts
         key: ${{ runner.os }}-${{ matrix.otp }}-${{ matrix.elixir }}-plts-${{ hashFiles('**/mix.lock') }}
-        restore-keys: ${{ runner.os }}-${{ matrix.otp }}-plts-${{ matrix.elixir }}-
+        restore-keys: ${{ runner.os }}-${{ matrix.otp }}-${{ matrix.elixir }}-plts-
     - name: Create PLTs
       if: steps.plt-cache.outputs.cache-hit != 'true'
       run: |
