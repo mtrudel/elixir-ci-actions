@@ -74,7 +74,6 @@ jobs:
         key: ${{ runner.os }}-${{ matrix.otp }}-${{ matrix.elixir }}-plts-${{ hashFiles('**/mix.lock') }}
         restore-keys: ${{ runner.os }}-${{ matrix.otp }}-${{ matrix.elixir }}-plts-
     - name: Create PLTs
-      if: steps.plt-cache.outputs.cache-hit != 'true'
       run: |
         mkdir -p priv/plts
         mix dialyzer --plt
