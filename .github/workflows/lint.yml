@@ -8,7 +8,7 @@ on:
         default: "[\"1.18.x\"]"
       erlangs:
         type: string
-        default: "[\"27.x\"]"
+        default: "[\"28.x\"]"
       apt-packages:
         type: string
         default: ""
