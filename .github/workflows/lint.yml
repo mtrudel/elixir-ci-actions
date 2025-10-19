@@ -5,7 +5,7 @@ on:
     inputs:
       elixirs:
         type: string
-        default: "[\"1.18.x\"]"
+        default: "[\"1.19.x\"]"
       erlangs:
         type: string
         default: "[\"28.x\"]"
