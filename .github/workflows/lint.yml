@@ -19,6 +19,8 @@ env:
 jobs:
   lint:
     runs-on: ubuntu-latest
+    permissions:
+      actions: write
     strategy:
       fail-fast: false
       matrix:
@@ -73,4 +75,26 @@ jobs:
         mkdir -p priv/plts
         mix dialyzer --plt
     - name: Run dialyzer
+      id: dialyzer
+      continue-on-error: true
       run: mix dialyzer --format github
+    - name: Evict stale PLT cache and retry dialyzer
+      if: steps.dialyzer.outcome == 'failure'
+      env:
+        GH_TOKEN: ${{ github.token }}
+      run: |
+        echo "Dialyzer failed; evicting stale PLT caches and retrying..."
+        PLT_KEY_PREFIX="${{ runner.os }}-${{ matrix.otp }}-${{ matrix.elixir }}-plts-"
+        gh cache list \
+          --repo "${{ github.repository }}" \
+          --key "$PLT_KEY_PREFIX" \
+          --json key \
+          --jq '.[].key' | \
+        while IFS= read -r cache_key; do
+          echo "Evicting cache: $cache_key"
+          gh cache delete "$cache_key" --repo "${{ github.repository }}" || true
+        done
+        rm -rf priv/plts
+        mkdir -p priv/plts
+        mix dialyzer --plt
+        mix dialyzer --format github
