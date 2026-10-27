@@ -5,10 +5,10 @@ on:
     inputs:
       elixirs:
         type: string
-        default: "[\"1.17.x\", \"1.18.x\", \"1.19.0\"]"
+        default: "[\"1.18.x\", \"1.19.x\", \"1.20.0\"]"
       erlangs:
         type: string
-        default: "[\"26.x\", \"27.x\", \"28.x\"]"
+        default: "[\"27.x\", \"28.x\", \"29.x\"]"
       apt-packages:
         type: string
         default: ""
@@ -25,12 +25,12 @@ jobs:
         elixir: ${{ fromJSON(inputs.elixirs) }}
         otp: ${{ fromJSON(inputs.erlangs) }}
         exclude:
-          - elixir: 1.17.x
+          - elixir: 1.18.x
             otp: 28.x
+          - elixir: 1.18.x
+            otp: 29.x
           - elixir: 1.19.x
-            otp: 26.x
-          - elixir: 1.19.x
-            otp: 27.x
+            otp: 29.x
     steps:
     - name: Install apt packages
       if: inputs.apt-packages
